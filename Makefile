@@ -1,6 +1,6 @@
 VFILES=$(wildcard *.v)
 
-OKFILES=$(wildcard *.ok)
+OKFILES=$(wildcard *.ok */*.ok)
 TESTS=$(subst .ok,,$(OKFILES))
 OUTS=$(addsuffix .out,$(TESTS))
 RESULTS=$(addsuffix .res,$(TESTS))
@@ -20,7 +20,7 @@ $(OUTS) : %.out : ppc Makefile %.bin
 	@-timeout 10 ./ppc > $*.raw 2>&1
 	@-rm -f mem.bin
 	@-mv ppc.vcd $*.vcd
-	@-egrep -v '^WARNING' $*.raw | egrep -v '^=== ' | egrep -v '^VCD'  > $*.out
+	@-((egrep -v '^WARNING' $*.raw | egrep -v '^=== ' | egrep -v '^VCD') || true)  > $*.out
 	@#echo "#=================\n"
 
 $(RESULTS) : %.res : %.out %.ok Makefile
