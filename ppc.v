@@ -1,7 +1,6 @@
 `define F 0
 `define D 1
 `define X 2
-//`define M 3
 `define WB 3
 
 module main();
@@ -20,7 +19,6 @@ module main();
     /* Memory interface */
     /********************/
 
-    //Used to be M
     wire memReadEn0 = (state == `X) & allLd;
     wire [0:60]memReadAddr0 = ea[0:60];
     wire [0:63]memReadData0;
@@ -83,7 +81,7 @@ module main();
     wire [0:63]vb = regReadData1;
     wire [0:63]vs = regReadData0;
     wire [0:63]va0 = (ra == 0) ? 0 : va;
-    wire [0:7]print0 = regReadData1;
+    wire [0:7]print0 = regReadData1[56:63];
     wire [0:63]print2 = regReadData1;
 
     //Branching
@@ -146,11 +144,6 @@ module main();
             if (allAdd & inst[21]) begin
                 xer <= isOver | xer;
             end
-            //$display("%s%d", "res:", regWriteData0);
-            //$display("%s%d", "cr[1]:", cr[1]);
-            /*if (allAdd) begin
-                $display(li);
-            end*/
         end else begin
             state <= state + 1;
         end
