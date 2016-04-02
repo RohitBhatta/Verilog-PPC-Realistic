@@ -114,7 +114,7 @@ module main();
     wire isLess = regWriteData0[0];
     wire isGreater = ~regWriteData0[0] & regWriteData0 != 0;
     wire isEqual = regWriteData0 == 0;
-    wire isOver = (isLess & (~regReadAddr0[0] & ~regReadAddr1[0])) | (isGreater & (regReadAddr0[0] & regReadAddr1[0]));
+    wire isOver = (isLess & (~regReadData0[0] & ~regReadData1[0])) | (isGreater & (regReadData0[0] & regReadData1[0]));
 
     always @(posedge clk) begin
         if (state == `WB) begin
