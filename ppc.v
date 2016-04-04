@@ -144,12 +144,6 @@ module main();
             if (allAdd & inst[21]) begin
                 xer <= isOver | xer;
             end
-            /*if (isAddODot | isOrDot) begin
-                $display("%s%d", "cr[0]: ", cr[0]);
-                $display("%s%d", "cr[1]: ", cr[1]);
-                $display("%s%d", "cr[2]: ", cr[2]);
-                $display("%s%d", "cr[3]: ", cr[3]);
-            end*/
         end else begin
             state <= state + 1;
         end
